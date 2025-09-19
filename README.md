@@ -7,6 +7,8 @@ Niramaya is a comprehensive health information and disease outbreak alert system
 
 ![System Architecture Diagram](work-flow.jpg)
 
+##demo link : https://demo-sih-one.vercel.app/
+
 **Key Components:**
 
 - **User Interfaces:**
