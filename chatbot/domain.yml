@@ -1,0 +1,37 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - ask_disease_info
+  - ask_vaccination
+  - report_outbreak
+  - language_change
+
+entities:
+  - disease
+  - location
+  - language
+
+slots:
+  disease:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: disease
+  user_language:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: language
+
+responses:
+  utter_greet:
+    - text: "Hello! I'm Niramaya. How can I help you today?"
+  utter_goodbye:
+    - text: "Stay healthy!"
+
+actions:
+  - action_get_disease_info
+  - action_get_vaccination_schedule
+

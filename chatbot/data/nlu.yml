@@ -1,0 +1,25 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hello
+    - hi
+    - नमस्ते
+
+- intent: ask_disease_info
+  examples: |
+    - tell me about [fever](disease)
+    - what is [malaria](disease)
+    - [dengue](disease) symptoms
+
+- intent: ask_vaccination
+  examples: |
+    - vaccination schedule
+    - vaccine for children
+
+- intent: language_change
+  examples: |
+    - change to [hindi](language)
+    - speak in [english](language)
+

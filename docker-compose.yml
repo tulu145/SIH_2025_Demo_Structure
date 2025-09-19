@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: niramaya
+      POSTGRES_USER: niramaya_user
+      POSTGRES_PASSWORD: secure_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  backend:
+    build: ./backend
+    ports:
+      - "6000:5000"
+    environment:
+      - DATABASE_URL=postgres://niramaya_user:secure_password@postgres:5432/niramaya
+      - REDIS_URL=redis://redis:6379
+      - WEBHOOK_VERIFY_TOKEN=${WEBHOOK_VERIFY_TOKEN}
+      - RASA_URL=http://chatbot:3005
+    depends_on:
+      - postgres
+      - redis
+      - chatbot
+
+  chatbot:
+    build: ./chatbot
+    ports:
+      - "5005:5005"
+    environment:
+      - BACKEND_URL=http://backend:3005
+
+volumes:
+  postgres_data:
+
+
